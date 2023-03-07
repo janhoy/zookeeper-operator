@@ -9,11 +9,11 @@
 #
 
 ARG DOCKER_REGISTRY
-FROM  ${DOCKER_REGISTRY:+$DOCKER_REGISTRY/}eclipse-temurin:11-jdk-focal
+FROM  ${DOCKER_REGISTRY:+$DOCKER_REGISTRY/}eclipse-temurin:11-jdk
 RUN mkdir /zu
 COPY zu /zu
 WORKDIR /zu
-RUN ./gradlew --console=verbose --info shadowJar
+#RUN ./gradlew --console=verbose --info shadowJar --no-daemon
 
 FROM ${DOCKER_REGISTRY:+$DOCKER_REGISTRY/}zookeeper:3.8.1-temurin
 COPY bin /usr/local/bin
